@@ -459,6 +459,7 @@ export default function App() {
                       <div 
                         style={{ 
                           writingMode: 'vertical-rl',
+                          textOrientation: 'upright',
                           display: 'flex',
                           flexDirection: 'column',
                           alignItems: 'center'
@@ -519,6 +520,7 @@ export default function App() {
                         <div 
                           style={{ 
                             writingMode: 'vertical-rl',
+                            textOrientation: 'upright',
                             fontFamily: 'Shippori Mincho, serif',
                             fontSize: '1rem',
                             color: '#333',
@@ -536,6 +538,7 @@ export default function App() {
                         <div 
                           style={{ 
                             writingMode: 'vertical-rl',
+                            textOrientation: 'upright',
                             fontFamily: 'Shippori Mincho, serif',
                             fontSize: '1rem',
                             color: '#333',
@@ -553,6 +556,7 @@ export default function App() {
                         <div 
                           style={{ 
                             writingMode: 'vertical-rl',
+                            textOrientation: 'upright',
                             fontFamily: 'Shippori Mincho, serif',
                             fontSize: '1rem',
                             color: '#333',
