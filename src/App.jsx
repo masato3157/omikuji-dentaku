@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+
 import { SoundEngine } from './utils/SoundEngine';
 import { ChevronRight, Copy } from 'lucide-react';
 import messagesData from './data/messages.json';
@@ -29,7 +29,7 @@ const VerticalText = ({ text, style, className, color }) => {
   );
 };
 
-const App = () => {
+export default function App() {
   const [display, setDisplay] = useState('0');
   const [equation, setEquation] = useState('');
   const [currentMessage, setCurrentMessage] = useState(null);
