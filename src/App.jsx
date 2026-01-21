@@ -466,13 +466,15 @@ export default function App() {
                         <div 
                           className="force-upright"
                           style={{
+                            writingMode: 'vertical-rl',
+                            textOrientation: 'upright',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
                             border: '2px solid #c53d43',
                             borderRadius: '50%',
                             width: '48px',
                             height: '48px',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
                             color: '#c53d43',
                             fontFamily: 'Shippori Mincho, serif',
                             fontSize: '1.3rem',
