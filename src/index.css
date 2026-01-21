@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Space Grotesk", sans-serif;
+  --font-sans: "Noto Sans JP", "Noto Sans", sans-serif;
+}
+
+@layer utilities {
+  .noise-texture {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuAA7VHeiqTQPVO1h9Ck9mOACzky1dUCuRc0GP2M6lJFgWDZv6iaKCJz49BbNGhR5rYWsTRbcqgrBeQu-pzUXq5VzeVMFKcNexpW69YBwgWgSK3HzpsLtPTA3fhYQoEf-mPgbp2g2IEfcEwKIoRRmZ4ZzTEF2ZhkeAuZAHWmPBzFGbZi3pnkQpD227IizdCsZOhZ8Matz83UpIw--ln2za_ORg633Jw-Hd0nCoMhOl5WpeACqqPo96oLlT3xTQIjiLaNAz6bM8xcs1Bm);
+    pointer-events: none;
+  }
+}
+
+/* 
+ * ユーザー支給の厳格なCSS定義 
+ * Tailwindのクラス干渉を防ぐため、ここで定義する
+ */
+
+body {
+    background-color: #1a1a1a; /* ページ全体の背景をダークグレーに */
+    color: #333;
+}
+
+.silver-chassis {
+    /* ベースカラー（少し暗めに設定して重厚感を出す） */
+    background-color: #c0c0c0;
+    
+    /* 複数のテクスチャを重ねてリアルな質感を表現 */
+    background-image: 
+        /* 1. ヘアラインノイズ（横縞）を濃くして目立たせる */
+        repeating-linear-gradient(
+            0deg,
+            transparent 0px,
+            transparent 1px,
+            rgba(0, 0, 0, 0.15) 1px, 
+            rgba(0, 0, 0, 0.15) 2px
+        ),
+        /* 2. 金属光沢のグラデーション（明暗のメリハリを強く） */
+        linear-gradient(
+            135deg, 
+            rgba(255,255,255,1) 0%, 
+            rgba(200,200,200,0.5) 30%, 
+            rgba(160,160,160,0.8) 60%,
+            rgba(120,120,120,1) 100%
+        );
+    
+    /* テクスチャと光沢を合成 */
+    background-blend-mode: multiply;
+
+    /* エッジのハイライト（削り出し感の演出） */
+    box-shadow: 
+        inset 0 2px 1px rgba(255,255,255,0.9), /* 上部の鋭いハイライト */
+        inset 0 -2px 4px rgba(0,0,0,0.4),      /* 下部の深いシェード */
+        0 25px 50px -12px rgba(0, 0, 0, 0.7);  /* 本体が浮いている影 */
+}
+
+/* 脱力系フォントクラス */
+.font-datsuryoku {
+    font-family: 'Yusei Magic', sans-serif;
+}
+
+/* ボタンの立体感 */
+.btn-shadow {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255,255,255,0.2);
+}
+.btn-shadow:active {
+    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.4);
+    transform: translateY(1px);
+}
