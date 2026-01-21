@@ -464,6 +464,7 @@ export default function App() {
                       >
                         {/* 運勢スタンプ - 赤い丸 */}
                         <div 
+                          className="force-upright"
                           style={{
                             border: '2px solid #c53d43',
                             borderRadius: '50%',

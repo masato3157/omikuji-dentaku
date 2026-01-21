@@ -90,5 +90,14 @@ body {
   -webkit-writing-mode: vertical-rl;
   text-orientation: upright;
   -webkit-text-orientation: upright;
-  vertical-align: middle;
+  text-align: center; /* 縦書きモードでの行内中央揃え（縦方向） */
+  width: 100%; /* 親要素内で幅を確保 */
+}
+
+/* 強制的に縦書き・直立にするクラス（ネストした要素用） */
+.force-upright {
+    writing-mode: vertical-rl !important;
+    -webkit-writing-mode: vertical-rl !important;
+    text-orientation: upright !important;
+    -webkit-text-orientation: upright !important;
 }
