@@ -69,35 +69,4 @@ body {
     transform: translateY(1px);
 }
 
-/* 縦書き表示用ユーティリティクラス（Android対策でプレフィックス追加） */
-.vertical-text {
-  writing-mode: vertical-rl;
-  -webkit-writing-mode: vertical-rl;
-  -ms-writing-mode: tb-rl;
-  text-orientation: upright;
-  -webkit-text-orientation: upright;
-  display: inline-block;
-  font-feature-settings: "vrt2";
-  font-variant-vertical-text: normal;
-  line-height: 1.6;
-  vertical-align: top;
-}
-
-/* 運勢スタンプ用レイアウト（上下中央揃え） */
-.fortune-stamp-container {
-  display: inline-block;
-  writing-mode: vertical-rl;
-  -webkit-writing-mode: vertical-rl;
-  text-orientation: upright;
-  -webkit-text-orientation: upright;
-  text-align: center; /* 縦書きモードでの行内中央揃え（縦方向） */
-  width: 100%; /* 親要素内で幅を確保 */
-}
-
-/* 強制的に縦書き・直立にするクラス（ネストした要素用） */
-.force-upright {
-    writing-mode: vertical-rl !important;
-    -webkit-writing-mode: vertical-rl !important;
-    text-orientation: upright !important;
-    -webkit-text-orientation: upright !important;
-}
+/* 縦書き関連クラスは削除されました */

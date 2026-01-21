@@ -1,11 +1,35 @@
 import { useState, useRef, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { SoundEngine } from './utils/SoundEngine';
 import { ChevronRight, Copy } from 'lucide-react';
 import messagesData from './data/messages.json';
 import { getRandomFortuneHook } from './constants/fortuneHooks';
 import { getRandomFortune } from './constants/fortunes';
 
-export default function App() {
+// 縦書き表示用コンポーネント（flex-colによる疑似実装）
+const VerticalText = ({ text, style, className, color }) => {
+  if (!text) return null;
+  // 長音記号などの回転対策も含める
+  const getChar = (char) => {
+    if (char === 'ー' || char === '−') return '｜';
+    if (char === '「' || char === '」' || char === '（' || char === '）') {
+       return <span style={{display:'inline-block', transform:'rotate(90deg)'}}>{char}</span>;
+    }
+    return char;
+  };
+
+  return (
+    <div className={`flex flex-col items-center ${className || ''}`} style={{ lineHeight: 1.2, ...style }}>
+      {Array.from(text).map((char, index) => (
+        <span key={index} style={{ color: color || 'inherit', margin: '0 0 2px 0' }}>
+          {getChar(char)}
+        </span>
+      ))}
+    </div>
+  );
+};
+
+const App = () => {
   const [display, setDisplay] = useState('0');
   const [equation, setEquation] = useState('');
   const [currentMessage, setCurrentMessage] = useState(null);
@@ -456,45 +480,30 @@ export default function App() {
                         padding: '16px 8px'
                       }}
                     >
-                      <div 
-                        className="fortune-stamp-container"
-                        style={{ 
-                          // vertical styles managed by CSS class
-                        }}
-                      >
+                      <div className="flex flex-row-reverse items-center justify-center gap-4 h-full">
                         {/* 運勢スタンプ - 赤い丸 */}
                         <div 
-                          className="force-upright"
                           style={{
-                            writingMode: 'vertical-rl',
-                            textOrientation: 'upright',
-                            display: 'block',  /* Flexbox回避 */
-                            textAlign: 'center', /* 縦方向（Inline軸）の中央揃え */
-                            lineHeight: '44px', /* 横方向（Block軸）の中央揃え、border(2px*2)を引いた高さ */
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
                             border: '2px solid #c53d43',
                             borderRadius: '50%',
                             width: '48px',
                             height: '48px',
                             color: '#c53d43',
                             fontFamily: 'Shippori Mincho, serif',
-                            fontSize: '1.3rem',
+                            fontSize: '1.2rem',
                             fontWeight: 'bold',
-                            marginLeft: '20px'
+                            backgroundColor: '#fffbe8' 
                           }}
                         >
-                          {currentMessage?.fortune || '吉'}
+                          <VerticalText text={currentMessage?.fortune || '吉'} style={{ fontSize: '1.2rem', lineHeight: 1 }} />
                         </div>
-                        {/* メインの一言（hook） */}
-                        <p 
-                          style={{
-                            fontFamily: 'Shippori Mincho, serif',
-                            fontSize: '1.1rem',
-                            color: '#333',
-                            lineHeight: '1.8'
-                          }}
-                        >
-                          {currentMessage?.hook || ''}
-                        </p>
+                        {/* メインの一言 */}
+                        <div className="py-2">
+                           <VerticalText text={currentMessage?.hook || ''} style={{ fontFamily: 'Yomogi, cursive', fontSize: '1.3rem', color: '#333' }} />
+                        </div>
                       </div>
                     </div>
 
@@ -516,56 +525,23 @@ export default function App() {
                           alignItems: 'flex-start'
                         }}
                       >
-                        {/* 項目1：願望 - 縦一行（項目名＋文言） */}
-                        <div 
-                          className="vertical-text"
-                          style={{ 
-                            fontFamily: 'Shippori Mincho, serif',
-                            fontSize: '1rem',
-                            color: '#333',
-                            lineHeight: '1.6'
-                          }}
-                        >
-                          <span style={{ color: '#c53d43' }}>
-                            {currentMessage?.items?.[0]?.label || '願望'}
-                          </span>
-                          <span>
-                            {'　'}{currentMessage?.items?.[0]?.value || 'かなう'}
-                          </span>
+                        {/* 項目1：願望 */}
+                        <div className="flex flex-col items-center gap-1">
+                          <VerticalText text={currentMessage?.items?.[0]?.label || '願望'} color="#c53d43" style={{fontFamily: 'Shippori Mincho, serif', fontWeight:'bold'}} />
+                          <div className="h-2"></div>
+                          <VerticalText text={currentMessage?.items?.[0]?.value || 'かなう'} style={{fontFamily: 'Shippori Mincho, serif'}} />
                         </div>
-                        {/* 項目2：恋愛 - 縦一行（項目名＋文言） */}
-                        <div 
-                          className="vertical-text"
-                          style={{ 
-                            fontFamily: 'Shippori Mincho, serif',
-                            fontSize: '1rem',
-                            color: '#333',
-                            lineHeight: '1.6'
-                          }}
-                        >
-                          <span style={{ color: '#c53d43' }}>
-                            {currentMessage?.items?.[1]?.label || '恋愛'}
-                          </span>
-                          <span>
-                            {'　'}{currentMessage?.items?.[1]?.value || 'ほどほど'}
-                          </span>
+                        {/* 項目2：恋愛 */}
+                        <div className="flex flex-col items-center gap-1">
+                          <VerticalText text={currentMessage?.items?.[1]?.label || '恋愛'} color="#c53d43" style={{fontFamily: 'Shippori Mincho, serif', fontWeight:'bold'}} />
+                          <div className="h-2"></div>
+                          <VerticalText text={currentMessage?.items?.[1]?.value || 'ほどほど'} style={{fontFamily: 'Shippori Mincho, serif'}} />
                         </div>
-                        {/* 項目3：待人 - 縦一行（項目名＋文言） */}
-                        <div 
-                          className="vertical-text"
-                          style={{ 
-                            fontFamily: 'Shippori Mincho, serif',
-                            fontSize: '1rem',
-                            color: '#333',
-                            lineHeight: '1.6'
-                          }}
-                        >
-                          <span style={{ color: '#c53d43' }}>
-                            {currentMessage?.items?.[2]?.label || '待人'}
-                          </span>
-                          <span>
-                            {'　'}{currentMessage?.items?.[2]?.value || '来る'}
-                          </span>
+                        {/* 項目3：待人 */}
+                        <div className="flex flex-col items-center gap-1">
+                          <VerticalText text={currentMessage?.items?.[2]?.label || '待人'} color="#c53d43" style={{fontFamily: 'Shippori Mincho, serif', fontWeight:'bold'}} />
+                          <div className="h-2"></div>
+                          <VerticalText text={currentMessage?.items?.[2]?.value || '来る'} style={{fontFamily: 'Shippori Mincho, serif'}} />
                         </div>
                       </div>
                     </div>
