@@ -469,12 +469,16 @@ const App = () => {
                   }}
                 >
                   {/* 左右2分割レイアウト（flex-row-reverse で向かって右側に運勢を配置） */}
-                  <div className="flex flex-row-reverse h-full" style={{ minHeight: '180px' }}>
+                  <div className="flex flex-row-reverse h-full" style={{ minHeight: '180px', height: '100%', alignItems: 'stretch' }}>
                     
                     {/* 右側（向かって右）：運勢スタンプ＋メインの一言 - 上下中央 */}
                     <div 
                       className="flex justify-center items-center"
                       style={{ 
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        height: '100%',
                         borderLeft: '1px solid #c53d43',
                         width: '50%',
                         padding: '16px 8px'
