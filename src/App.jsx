@@ -460,9 +460,7 @@ export default function App() {
                         style={{ 
                           writingMode: 'vertical-rl',
                           textOrientation: 'upright',
-                          display: 'flex',
-                          flexDirection: 'column',
-                          alignItems: 'center'
+                          display: 'inline-block',
                         }}
                       >
                         {/* 運勢スタンプ - 赤い丸 */}
@@ -521,6 +519,7 @@ export default function App() {
                           style={{ 
                             writingMode: 'vertical-rl',
                             textOrientation: 'upright',
+                            display: 'inline-block',
                             fontFamily: 'Shippori Mincho, serif',
                             fontSize: '1rem',
                             color: '#333',
@@ -539,6 +538,7 @@ export default function App() {
                           style={{ 
                             writingMode: 'vertical-rl',
                             textOrientation: 'upright',
+                            display: 'inline-block',
                             fontFamily: 'Shippori Mincho, serif',
                             fontSize: '1rem',
                             color: '#333',
@@ -557,6 +557,7 @@ export default function App() {
                           style={{ 
                             writingMode: 'vertical-rl',
                             textOrientation: 'upright',
+                            display: 'inline-block',
                             fontFamily: 'Shippori Mincho, serif',
                             fontSize: '1rem',
                             color: '#333',
