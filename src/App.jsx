@@ -468,9 +468,9 @@ export default function App() {
                           style={{
                             writingMode: 'vertical-rl',
                             textOrientation: 'upright',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
+                            display: 'block',  /* Flexbox回避 */
+                            textAlign: 'center', /* 縦方向（Inline軸）の中央揃え */
+                            lineHeight: '44px', /* 横方向（Block軸）の中央揃え、border(2px*2)を引いた高さ */
                             border: '2px solid #c53d43',
                             borderRadius: '50%',
                             width: '48px',
