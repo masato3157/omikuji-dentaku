@@ -12,5 +12,15 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+<script>
+  liff.init({
+    liffId: "2008935592-LTkwDcg3"
+  }).then(() => {
+    console.log("LIFF初期化成功");
+  }).catch((err) => {
+    console.error("LIFF初期化失敗", err);
+  });
+</script>
   </body>
 </html>
