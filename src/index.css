@@ -68,3 +68,27 @@ body {
     box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.4);
     transform: translateY(1px);
 }
+
+/* 縦書き表示用ユーティリティクラス（Android対策でプレフィックス追加） */
+.vertical-text {
+  writing-mode: vertical-rl;
+  -webkit-writing-mode: vertical-rl;
+  -ms-writing-mode: tb-rl;
+  text-orientation: upright;
+  -webkit-text-orientation: upright;
+  display: inline-block;
+  font-feature-settings: "vrt2";
+  font-variant-vertical-text: normal;
+  line-height: 1.6;
+  vertical-align: top;
+}
+
+/* 運勢スタンプ用レイアウト（上下中央揃え） */
+.fortune-stamp-container {
+  display: inline-block;
+  writing-mode: vertical-rl;
+  -webkit-writing-mode: vertical-rl;
+  text-orientation: upright;
+  -webkit-text-orientation: upright;
+  vertical-align: middle;
+}

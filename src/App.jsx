@@ -457,10 +457,9 @@ export default function App() {
                       }}
                     >
                       <div 
+                        className="fortune-stamp-container"
                         style={{ 
-                          writingMode: 'vertical-rl',
-                          textOrientation: 'upright',
-                          display: 'inline-block',
+                          // vertical styles managed by CSS class
                         }}
                       >
                         {/* 運勢スタンプ - 赤い丸 */}
@@ -516,10 +515,8 @@ export default function App() {
                       >
                         {/* 項目1：願望 - 縦一行（項目名＋文言） */}
                         <div 
+                          className="vertical-text"
                           style={{ 
-                            writingMode: 'vertical-rl',
-                            textOrientation: 'upright',
-                            display: 'inline-block',
                             fontFamily: 'Shippori Mincho, serif',
                             fontSize: '1rem',
                             color: '#333',
@@ -535,10 +532,8 @@ export default function App() {
                         </div>
                         {/* 項目2：恋愛 - 縦一行（項目名＋文言） */}
                         <div 
+                          className="vertical-text"
                           style={{ 
-                            writingMode: 'vertical-rl',
-                            textOrientation: 'upright',
-                            display: 'inline-block',
                             fontFamily: 'Shippori Mincho, serif',
                             fontSize: '1rem',
                             color: '#333',
@@ -554,10 +549,8 @@ export default function App() {
                         </div>
                         {/* 項目3：待人 - 縦一行（項目名＋文言） */}
                         <div 
+                          className="vertical-text"
                           style={{ 
-                            writingMode: 'vertical-rl',
-                            textOrientation: 'upright',
-                            display: 'inline-block',
                             fontFamily: 'Shippori Mincho, serif',
                             fontSize: '1rem',
                             color: '#333',
