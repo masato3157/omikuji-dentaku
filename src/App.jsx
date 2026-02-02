@@ -672,6 +672,29 @@ export default function App() {
         .animate-pulse-scale { animation: pulse-scale 1.5s ease-in-out infinite; }
       `}
       </style>
+
+      {/* フッター（利用規約・プライバシーポリシー） */}
+      <footer className="mt-8 py-4 text-center text-xs text-gray-400 border-t border-gray-100">
+        <div className="space-x-4">
+          <a 
+            href="/terms.html" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="hover:text-gray-600 underline"
+          >
+            利用規約
+          </a>
+          <a 
+            href="/privacy.html" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="hover:text-gray-600 underline"
+          >
+            プライバシーポリシー
+          </a>
+        </div>
+        <p className="mt-2 text-[10px] text-gray-300">© 2026 Omikuji Dentaku</p>
+      </footer>
     </div>
   );
 }
