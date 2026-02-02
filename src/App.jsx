@@ -7,7 +7,19 @@ import { getRandomFortuneHook } from './constants/fortuneHooks';
 import { getRandomFortune, luckyItems } from './constants/fortunes';
 import { ENABLE_LUCKY_ITEM } from './constants/config';
 import { buildAmazonSearchUrl } from './utils/amazon';
-import { Paperclip, Ear, Zap, Landmark, CircleDot, BookOpen, Hand, Droplets } from 'lucide-react';
+import { 
+  Paperclip, Ear, Zap, Landmark, CircleDot, BookOpen, Hand, Droplets,
+  Banana, Bell, XOctagon, Utensils, Smile, Rocket, AlertTriangle, PenTool, 
+  Banknote, Ghost, Scissors, Dices, Umbrella, CornerDownLeft, Bird, Fish, 
+  Search, Crown, Sparkles, Brush, Globe, Telescope, Skull, Disc, Package, 
+  Wine, Layers, Sword, Armchair, Grid, Music, Wind, EarOff, Flame, 
+  TreeDeciduous, Loader, Star, Sprout, Book, Watch, Hourglass, Activity, 
+  Keyboard, AlignJustify, Edit3, Droplet, Eraser, Tablet, HelpCircle, Edit2, 
+  Wrench, CloudRain, Thermometer, Sun, RefreshCw, Radio, GitBranch, Triangle, 
+  Cat, Network, Clover, Shirt, DollarSign, Gem, Compass, Footprints, 
+  Crosshair, Eye, Circle, Snail, Maximize, Glasses, PartyPopper, Mic, 
+  Clapperboard, Megaphone 
+} from 'lucide-react';
 
 // 縦書き表示用コンポーネント（flex-colによる疑似実装）
 const VerticalText = ({ text, style, className, color }) => {
@@ -37,7 +49,17 @@ const LuckyItemBanner = ({ item }) => {
   if (!item) return null;
 
   const IconComponent = {
-    Paperclip, Ear, Zap, Landmark, CircleDot, BookOpen, Hand, Droplets
+    Paperclip, Ear, Zap, Landmark, CircleDot, BookOpen, Hand, Droplets,
+    Banana, Bell, XOctagon, Utensils, Smile, Rocket, AlertTriangle, PenTool,
+    Banknote, Ghost, Scissors, Dices, Umbrella, CornerDownLeft, Bird, Fish,
+    Search, Crown, Sparkles, Brush, Globe, Telescope, Skull, Disc, Package,
+    Wine, Layers, Sword, Armchair, Grid, Music, Wind, EarOff, Flame,
+    TreeDeciduous, Loader, Star, Sprout, Book, Watch, Hourglass, Activity,
+    Keyboard, AlignJustify, Edit3, Droplet, Eraser, Tablet, HelpCircle, Edit2,
+    Wrench, CloudRain, Thermometer, Sun, RefreshCw, Radio, GitBranch, Triangle,
+    Cat, Network, Clover, Shirt, DollarSign, Gem, Compass, Footprints,
+    Crosshair, Eye, Circle, Snail, Maximize, Glasses, PartyPopper, Mic,
+    Clapperboard, Megaphone
   }[item.icon] || Paperclip;
 
   const handleClick = (e) => {
@@ -140,7 +162,7 @@ export default function App() {
     // ラッキーアイテム抽選
     if (ENABLE_LUCKY_ITEM) {
       if (fortuneResult.fortune === '凶') {
-        const voidItem = luckyItems.find(i => i.id === 6); // 虚無（禅の本）
+        const voidItem = luckyItems.find(i => i.id === 46); // 虚無（禅の本）
         setLuckyItem(voidItem || luckyItems[0]);
       } else {
         const randomItem = luckyItems[Math.floor(Math.random() * luckyItems.length)];
