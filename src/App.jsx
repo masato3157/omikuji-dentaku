@@ -8,6 +8,7 @@ import { getRandomFortuneHook } from './constants/fortuneHooks';
 import { getRandomFortune, luckyItems } from './constants/fortunes';
 import { ENABLE_LUCKY_ITEM } from './constants/config';
 import { buildAmazonSearchUrl } from './utils/amazon';
+import ShareButtons from './components/ShareButtons';
 import { 
   Paperclip, Ear, Zap, Landmark, CircleDot, BookOpen, Hand, Droplets,
   Banana, Bell, XOctagon, Utensils, Smile, Rocket, AlertTriangle, PenTool, 
@@ -484,7 +485,7 @@ export default function App() {
               }}
             >
                 {/* ヘッダー：タイトル＋閉じるボタン */}
-                <div className="w-full flex items-center justify-between px-4 pt-3 pb-2">
+                <div className="w-full flex items-center justify-between px-3 py-1">
                   <h2 
                     className="text-lg font-bold" 
                     style={{ 
@@ -503,7 +504,7 @@ export default function App() {
                 </div>
 
                 {/* ===== 上段：計算結果エリア ===== */}
-                <div className="mx-4 mb-3">
+                <div className="mx-3 mb-2">
                   <div 
                     className="bg-neutral-900 p-4 relative overflow-hidden"
                     style={{ 
@@ -533,7 +534,7 @@ export default function App() {
 
                 {/* ===== 中段: ラッキーアイテム or 広告エリア ===== */}
                 <div 
-                  className="mx-4 mb-3 flex items-center justify-center relative"
+                  className="mx-3 mb-2 flex items-center justify-center relative"
                   style={{ 
                     height: '60px', 
                     // ラッキーアイテムの場合は枠線を消す（コンポーネント側で持つため）、広告の場合は維持
@@ -556,16 +557,16 @@ export default function App() {
 
                 {/* ===== 下段：おみくじ詳細エリア（純和風・縦書き） ===== */}
                 <div 
-                  className="mx-4 mb-4 relative"
+                  className="mx-3 mb-1 relative"
                   style={{ 
                     backgroundColor: '#fffbf0',
                     border: '2px solid #c53d43',
                     borderRadius: '4px',
-                    minHeight: '200px'
+                    minHeight: '140px'
                   }}
                 >
                   {/* 左右2分割レイアウト（flex-row-reverse で向かって右側に運勢を配置） */}
-                  <div className="flex flex-row-reverse h-full" style={{ minHeight: '180px', height: '100%', alignItems: 'stretch' }}>
+                  <div className="flex flex-row-reverse h-full" style={{ minHeight: '140px', height: '100%', alignItems: 'stretch' }}>
                     
                     {/* 右側（向かって右）：運勢スタンプ＋メインの一言 - 上下中央 */}
                     <div 
@@ -612,7 +613,8 @@ export default function App() {
                       className="flex justify-center"
                       style={{ 
                         width: '50%',
-                        padding: '16px 8px',
+                        width: '50%',
+                        padding: '12px 4px',
                         alignItems: 'flex-start'
                       }}
                     >
@@ -646,8 +648,12 @@ export default function App() {
                       </div>
                     </div>
 
+
                   </div>
                 </div>
+
+                {/* SNSシェアボタンエリア */}
+                <ShareButtons fortune={currentMessage?.fortune} luckyItem={luckyItem} />
 
             </div>
         </div>
@@ -674,7 +680,7 @@ export default function App() {
       </style>
 
       {/* フッター（利用規約・プライバシーポリシー） */}
-      <footer className="mt-8 py-4 text-center text-xs text-gray-400 border-t border-gray-100">
+      <footer className="mt-2 py-1 text-center text-xs text-gray-400 border-none">
         <div className="space-x-4">
           <a 
             href="/terms.html" 
