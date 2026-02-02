@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import liff from '@line/liff'; // LIFF SDK Import
 
 import { SoundEngine } from './utils/SoundEngine';
 import { ChevronRight, Copy } from 'lucide-react';
@@ -67,9 +68,7 @@ const LuckyItemBanner = ({ item }) => {
     const url = buildAmazonSearchUrl(item.query);
     
     // LINE環境判定と遷移
-    // eslint-disable-next-line no-undef
-    if (typeof liff !== 'undefined' && liff.isInClient()) {
-      // eslint-disable-next-line no-undef
+    if (liff.isInClient()) {
       liff.openWindow({ url: url, external: true });
     } else {
       window.open(url, '_blank');
