@@ -94,3 +94,15 @@ export const getRandomFortune = () => {
     selectedItems
   };
 };
+
+// ラッキーアイテム定義
+export const luckyItems = [
+  { id: 1, name: '赤いゼムクリップ', query: 'ゼムクリップ 赤', icon: 'Paperclip' },
+  { id: 2, name: 'やたら高級な耳かき', query: '耳かき 高級', icon: 'Ear' },
+  { id: 3, name: '光るゲーミング箸', query: 'ゲーミング箸', icon: 'Zap' },
+  { id: 4, name: '金色のトランプ', query: 'トランプ ゴールド', icon: 'Landmark' },
+  { id: 5, name: '無限に潰せるアレ', query: '無限プチプチ', icon: 'CircleDot' },
+  { id: 6, name: '虚無（禅の本）', query: '禅 本', icon: 'BookOpen' }, // 凶用推奨
+  { id: 7, name: 'プロ仕様の軍手', query: '軍手 防刃', icon: 'Hand' },
+  { id: 8, name: 'すごい成分の入浴剤', query: '入浴剤 高級', icon: 'Droplets' },
+];

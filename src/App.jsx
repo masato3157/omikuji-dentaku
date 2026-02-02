@@ -4,7 +4,10 @@ import { SoundEngine } from './utils/SoundEngine';
 import { ChevronRight, Copy } from 'lucide-react';
 import messagesData from './data/messages.json';
 import { getRandomFortuneHook } from './constants/fortuneHooks';
-import { getRandomFortune } from './constants/fortunes';
+import { getRandomFortune, luckyItems } from './constants/fortunes';
+import { ENABLE_LUCKY_ITEM } from './constants/config';
+import { buildAmazonSearchUrl } from './utils/amazon';
+import { Paperclip, Ear, Zap, Landmark, CircleDot, BookOpen, Hand, Droplets } from 'lucide-react';
 
 // 縦書き表示用コンポーネント（flex-colによる疑似実装）
 const VerticalText = ({ text, style, className, color }) => {
@@ -29,10 +32,62 @@ const VerticalText = ({ text, style, className, color }) => {
   );
 };
 
+// ラッキーアイテムバナーコンポーネント
+const LuckyItemBanner = ({ item }) => {
+  if (!item) return null;
+
+  const IconComponent = {
+    Paperclip, Ear, Zap, Landmark, CircleDot, BookOpen, Hand, Droplets
+  }[item.icon] || Paperclip;
+
+  const handleClick = (e) => {
+    e.stopPropagation(); // モーダルが閉じないようにする
+    const url = buildAmazonSearchUrl(item.query);
+    
+    // LINE環境判定と遷移
+    // eslint-disable-next-line no-undef
+    if (typeof liff !== 'undefined' && liff.isInClient()) {
+      // eslint-disable-next-line no-undef
+      liff.openWindow({ url: url, external: true });
+    } else {
+      window.open(url, '_blank');
+    }
+  };
+
+  return (
+    <div 
+      onClick={handleClick}
+      className="w-full h-full flex items-center bg-white cursor-pointer hover:bg-orange-50 transition-colors select-none"
+      style={{
+        border: '1px solid #f59e0b',
+        borderRadius: '8px',
+        padding: '0 8px'
+      }}
+    >
+      {/* 左端: アイコン */}
+      <div className="flex items-center justify-center w-10 h-10 text-neutral-600">
+        <IconComponent size={24} />
+      </div>
+
+      {/* 中央: テキスト */}
+      <div className="flex flex-col flex-1 pl-2">
+        <span className="text-[10px] text-orange-500 leading-tight">ラッキーアイテム</span>
+        <span className="text-sm font-bold text-neutral-800 leading-tight truncate">{item.name}</span>
+      </div>
+
+      {/* 右端: Chevron */}
+      <div className="text-orange-400">
+        <ChevronRight size={20} />
+      </div>
+    </div>
+  );
+};
+
 export default function App() {
   const [display, setDisplay] = useState('0');
   const [equation, setEquation] = useState('');
   const [currentMessage, setCurrentMessage] = useState(null);
+  const [luckyItem, setLuckyItem] = useState(null);
   const [isCalculated, setIsCalculated] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [isNewNumber, setIsNewNumber] = useState(true);
@@ -81,6 +136,17 @@ export default function App() {
       items: fortuneResult.selectedItems
     });
     setHookText(getRandomFortuneHook());
+
+    // ラッキーアイテム抽選
+    if (ENABLE_LUCKY_ITEM) {
+      if (fortuneResult.fortune === '凶') {
+        const voidItem = luckyItems.find(i => i.id === 6); // 虚無（禅の本）
+        setLuckyItem(voidItem || luckyItems[0]);
+      } else {
+        const randomItem = luckyItems[Math.floor(Math.random() * luckyItems.length)];
+        setLuckyItem(randomItem);
+      }
+    }
   };
 
   // 広告読み込み
@@ -141,12 +207,14 @@ export default function App() {
     setEquation('');
     setIsNewNumber(true);
     setExplosionStyles(Array(19).fill({}));
+    setLuckyItem(null);
   };
 
   const resetCalcState = () => {
     setIsCalculated(false);
     setShowModal(false);
     setCurrentMessage(null);
+    setLuckyItem(null);
   };
 
   const handleNumber = (num) => {
@@ -442,20 +510,27 @@ export default function App() {
                   </div>
                 </div>
 
-                {/* ===== 中段：広告エリア ===== */}
+                {/* ===== 中段: ラッキーアイテム or 広告エリア ===== */}
                 <div 
                   className="mx-4 mb-3 flex items-center justify-center relative"
                   style={{ 
                     height: '60px', 
-                    backgroundColor: '#f5f5f0',
-                    border: '1px solid #c53d43',
+                    // ラッキーアイテムの場合は枠線を消す（コンポーネント側で持つため）、広告の場合は維持
+                    backgroundColor: ENABLE_LUCKY_ITEM ? 'transparent' : '#f5f5f0',
+                    border: ENABLE_LUCKY_ITEM ? 'none' : '1px solid #c53d43',
                     borderRadius: '4px'
                   }}
                 >
-                    <span className="text-[10px] text-neutral-400 absolute top-1 right-2">AD</span>
-                    <div ref={adContainerRef} className="w-full h-full flex items-center justify-center">
-                        <span className="text-neutral-400 text-sm">AD SPACE (320×50)</span>
-                    </div>
+                    {ENABLE_LUCKY_ITEM && luckyItem ? (
+                      <LuckyItemBanner item={luckyItem} />
+                    ) : (
+                      <>
+                        <span className="text-[10px] text-neutral-400 absolute top-1 right-2">AD</span>
+                        <div ref={adContainerRef} className="w-full h-full flex items-center justify-center">
+                            <span className="text-neutral-400 text-sm">AD SPACE (320×50)</span>
+                        </div>
+                      </>
+                    )}
                 </div>
 
                 {/* ===== 下段：おみくじ詳細エリア（純和風・縦書き） ===== */}
