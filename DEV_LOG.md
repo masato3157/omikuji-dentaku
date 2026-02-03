@@ -298,3 +298,23 @@
 * `src/App.jsx`
 * `src/constants/config.js`
 * `package.json`
+
+---
+
+## v0.9.2.2 (2026-02-04)
+
+### 静的ページの整備
+* **利用規約・プライバシーポリシーの刷新**:
+    * `public/terms.html` と `public/privacy.html` を、正式な運用に耐えうる内容（免責事項、広告配信、LINEプラットフォームへの言及など）に全面改定。
+    * デザインを統一し、シンプルで見やすい構成に変更。
+* **サービス紹介ページの作成**:
+    * `public/about.html` を新規作成。
+    * アプリのコンセプト、機能、利用シーンを説明し、LINEミニアプリへの誘導ボタンを設置。
+
+### 変更したファイル
+* `public/terms.html`
+* `public/privacy.html`
+* `public/about.html` (新規作成)
+* `package.json` - バージョン 0.9.2.2
+* `task.md`
+
